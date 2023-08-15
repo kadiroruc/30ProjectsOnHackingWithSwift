@@ -66,6 +66,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         guard let image = info[.editedImage] as? UIImage else { return }
 
         dismiss(animated: true)
+        if imageView.image != nil{
+            UIView.animate(withDuration: 1, delay: 0) {
+                self.imageView.alpha = 0
+            }
+        }
         currentImage = image
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey:kCIInputImageKey)
@@ -84,6 +89,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
             let processedImage = UIImage(cgImage: cgimg)
             self.imageView.image = processedImage
+            UIView.animate(withDuration: 1, delay: 0) {
+                self.imageView.alpha = 1
+            }
         }
 //        guard let image = currentFilter.outputImage else { return }
 //        //filtre de işlem yapılan CIImage ı döndürür.
