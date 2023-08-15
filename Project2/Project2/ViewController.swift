@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         correctFlag = Int.random(in: 0...2)
         title = countries[correctFlag].uppercased() + "                       Score:\(score)"
         
+
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button1.imageView?.layer.borderWidth = 1
         button1.imageView?.layer.borderColor = UIColor.lightGray.cgColor
@@ -44,10 +45,19 @@ class ViewController: UIViewController {
         button3.imageView?.layer.borderWidth = 1
         button3.imageView?.layer.borderColor = UIColor.lightGray.cgColor
         
+        UIView.animate(withDuration: 1, delay: 0) {
+            self.button1.transform = CGAffineTransform.identity
+            self.button2.transform = CGAffineTransform.identity
+            self.button3.transform = CGAffineTransform.identity
+        }
+        
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         var alertTitle: String
+        UIView.animate(withDuration: 1, delay: 0,usingSpringWithDamping: 0.5,initialSpringVelocity: 5) {
+            sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }
         if sender.tag == correctFlag {
             alertTitle = "Correct"
             score += 1
